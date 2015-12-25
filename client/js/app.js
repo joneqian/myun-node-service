@@ -36,10 +36,10 @@ angular
       });
     $urlRouterProvider.otherwise('login');
   }])
-  .run(['$rootScope', '$state', function($rootScope, $state) {
+  .run(['$rootScope', '$state', '$window', function($rootScope, $state, $window) {
     $rootScope.$on('$stateChangeStart', function(event, next) {
       // redirect to login page if not logged in
-      if (next.authenticate && !$rootScope.currentUser) {
+      if (next.authenticate && !$window.sessionStorage.getItem('currentUser')) {
         event.preventDefault(); //prevent current page from loading
         $state.go('forbidden');
       }

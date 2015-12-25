@@ -2,6 +2,7 @@
  * Created by LeYi on 2015/12/25.
  */
 var async = require('async');
+var utils = require('../util/utils');
 
 module.exports = function (app) {
     // create all models
@@ -30,10 +31,12 @@ module.exports = function (app) {
     function createProducts(cb) {
         var products = [];
         for (var i = 0; i < 3; i++) {
-            var productName = 'ÉÌÆ·'+ i;
+            var productName = 'å•†å“'+ i;
             var secKillStart = new Date();
-            products[i] = {name: productName, count: 1000 + i, isSecKill: true, secKillStart: secKillStart,
-                secKillEnd: secKillStart + 3600000};
+            var secKillEnd = new Date();
+            secKillEnd.setHours(secKillStart.getHours() + 1);
+            products[i] = {name: productName, count: 1000 + i, isSecKill: true,
+                secKillStart: utils.formatTime(secKillStart), secKillEnd: utils.formatTime(secKillEnd)};
         }
         app.models.Product.create(products, cb);
     }
