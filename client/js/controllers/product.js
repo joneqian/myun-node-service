@@ -1,16 +1,8 @@
 angular
   .module('app')
-  .controller('ProductController', ['$scope', 'Review', '$rootScope',
-      function($scope, Review, $rootScope) {
-    $scope.reviews = Review.find({
-      filter: {
-        where: {
-          publisherId: $rootScope.currentUser.id
-        },
-        include: [
-          'coffeeShop',
-          'reviewer'
-        ]
-      }
+  .controller('ProductController', ['$scope', 'Product', '$rootScope',
+      function($scope, Product, $rootScope) {
+    $scope.products = Product.find({
+      filter: {}
     });
   }]);

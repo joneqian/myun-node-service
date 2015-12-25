@@ -6,12 +6,14 @@ var async = require('async');
 module.exports = function (app) {
     // create all models
     async.parallel({
-        users: async.apply(createUsers)
+        users: async.apply(createUsers),
+        products: async.apply(createProducts)
     }, function(err, results) {
         if (err) throw err;
 
         console.log('> models created successfully');
-        console.log('> create ' + results.users.length +' users');
+        console.log('> create ' + results.users.length +' user');
+        console.log('> create ' + results.products.length +' product');
     });
 
     // create user
@@ -33,6 +35,6 @@ module.exports = function (app) {
             products[i] = {name: productName, count: 1000 + i, isSecKill: true, secKillStart: secKillStart,
                 secKillEnd: secKillStart + 3600000};
         }
-        app.models.MYUser.create(users, cb);
+        app.models.Product.create(products, cb);
     }
 };
