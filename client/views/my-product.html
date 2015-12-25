@@ -2,11 +2,10 @@
     <article ng-repeat="r in products.slice().reverse()">
         <header>
             <h1>{{r.name}}</h1>
-
-            <h2></h2>
         </header>
         <p>剩余数量：{{r.count}}</p>
         <p>活动时间：{{r.secKillStart}} - {{r.secKillEnd}}</p>
+        <p>剩余时间：{{r.remainTime}}</p>
         <div class="actions">
             <button class="btn-enable">秒杀</button>
         </div>

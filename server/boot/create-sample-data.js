@@ -34,7 +34,7 @@ module.exports = function (app) {
             var productName = '商品'+ i;
             var secKillStart = new Date();
             var secKillEnd = new Date();
-            secKillEnd.setHours(secKillStart.getHours() + 1);
+            secKillEnd.setMinutes(secKillStart.getMinutes() + 1);
             products[i] = {name: productName, count: 1000 + i, isSecKill: true,
                 secKillStart: utils.formatTime(secKillStart), secKillEnd: utils.formatTime(secKillEnd)};
         }
