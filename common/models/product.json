@@ -1,0 +1,32 @@
+{
+  "name": "Product",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "count": {
+      "type": "number",
+      "required": true
+    },
+    "isSecKill": {
+      "type": "boolean",
+      "required": true
+    },
+    "secKillStart": {
+      "type": "date"
+    },
+    "secKillEnd": {
+      "type": "date"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}
