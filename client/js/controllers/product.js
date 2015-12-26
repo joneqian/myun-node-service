@@ -4,6 +4,11 @@ angular
     function ($scope, Product) {
       $scope.products = Product.find({
         filter: {}
+      }, function () {
+        for (var i = 0; i < $scope.products.length; i++) {
+          var product = $scope.products[i];
+          product.isOverDue = false;
+        }
       });
 
       setInterval(function () {
@@ -15,6 +20,7 @@ angular
           if (c >= 0) {
             product.remainTime = getRemainTime(c);
           } else {
+            product.isOverDue = true;
             product.remainTime = '过期了';
           }
         }

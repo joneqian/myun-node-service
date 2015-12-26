@@ -4,7 +4,7 @@
   padding:0;
 }
 body {
-  font-family:'courier new';
+  font-family:'courier new', sans-serif;
   font-size:1rem;
 }
 button {
@@ -12,14 +12,20 @@ button {
   border:0;
   color:#777;
   cursor:pointer;
-  font-family:'courier new';
+  font-family:'courier new', sans-serif;
   font-size:1rem;
   padding:.5rem;
 }
 button.btn-enable{
-  color: #771822;
-  background: #1e8ba4;
+  color: #fdfdfe;
+  background: #e54346;
 }
+
+button.btn-disable{
+  color: #000000;
+  background: #f4f4f4;
+}
+
 button:active {
   background:#ddd;
 }
@@ -43,7 +49,7 @@ label {
 }
 select {
   background:#ddd;
-  text-indent: 0.01px;
+  text-indent: 1px;
   text-overflow: "";
 }
 p {
@@ -98,7 +104,7 @@ textarea {
   background:#ddd;
   border:0;
   display:inline-block;
-  font-family:'courier new';
+  font-family:'courier new', sans-serif;
   margin-bottom:1rem;
   padding:.5rem;
   vertical-align:middle;

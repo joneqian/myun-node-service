@@ -7,7 +7,8 @@
     <p>活动时间：{{r.secKillStart}} - {{r.secKillEnd}}</p>
     <p>剩余时间：{{r.remainTime}}</p>
     <div class="actions">
-      <button class="btn-enable">秒杀</button>
+      <button class="btn-disable" ng-show="r.isOverDue">已过期</button>
+      <button class="btn-enable" ng-hide="r.isOverDue">秒杀</button>
     </div>
   </article>
 </section>
