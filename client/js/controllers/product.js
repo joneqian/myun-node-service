@@ -8,6 +8,7 @@ angular
         for (var i = 0; i < $scope.products.length; i++) {
           var product = $scope.products[i];
           product.isOverDue = false;
+          product.msg = '';
         }
       });
 
@@ -29,15 +30,18 @@ angular
 
       $scope.submitForm = function (id) {
         var product = $scope.products[id - 1];
-        Order
-          .create({
-            count: 1,
-            productId: product.id
-          })
-          .$promise
-          .then(function () {
-
-          });
+        if (!product.isOverDue) {
+          Order
+            .secKillProduct({
+              count: 1,
+              productId: product.id
+            })
+            .$promise
+            .then(function (res) {
+              var status = JSON.parse(res.status);
+              product.msg = status.msg;
+            });
+        }
       };
 
       function getRemainTime(sec) {
