@@ -52,6 +52,20 @@ angular
             .then(function (res) {
               var status = JSON.parse(res.status);
               product.msg = status.msg;
+              if (status.status < 4) {
+                product.isCanSecKill = false;
+                if (status.status <=1 ) {
+                  product.btn = '失效';
+                }
+
+                if (status.status === 2 ) {
+                  product.btn = '已售完';
+                }
+
+                if (status.status === 3 ) {
+                  product.btn = '已购买';
+                }
+              }
             });
         }
       };

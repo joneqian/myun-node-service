@@ -63,12 +63,12 @@ module.exports = function (Order) {
           }
 
           if (!product) {
-            cb(null, JSON.stringify({status:0, msg:'商品不存在'}));
+            cb(null, JSON.stringify({status:1, msg:'商品不存在'}));
             return;
           }
 
           if (product.count <= 0) {
-            cb(null, JSON.stringify({status:0, msg:'商品已售完'}));
+            cb(null, JSON.stringify({status:2, msg:'商品已售完'}));
             return;
           }
 
@@ -78,8 +78,8 @@ module.exports = function (Order) {
               return;
             }
 
-            if (orders && orders.length >= 2 ) {
-              cb(null, JSON.stringify({status:0, msg:'超出限购数量'}));
+            if (orders && orders.length >= product.purchaseLimit ) {
+              cb(null, JSON.stringify({status:3, msg:'超出限购数量'}));
               return;
             }
 
@@ -93,7 +93,7 @@ module.exports = function (Order) {
                     if (err) {
                       cb(null, errStr);
                     } else {
-                      cb(null, JSON.stringify({status:0, msg:'购买成功'}));
+                      cb(null, JSON.stringify({status:4, msg:'购买成功'}));
                     }
                 });
               }
