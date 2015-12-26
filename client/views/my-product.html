@@ -11,11 +11,8 @@
       <p>剩余时间：{{r.remainTime}}</p>
       <p>{{r.msg}}</p>
 
-      <div class="actions" ng-show="r.isOverDue">
-        <button class="btn-disable">已过期</button>
-      </div>
-      <div class="actions" ng-hide="r.isOverDue">
-        <button class="btn-enable">秒杀</button>
+      <div class="actions">
+        <button ng-class="{true: 'btn-enable', false: 'btn-disable'}[r.isCanSecKill]">{{r.btn}}</button>
       </div>
     </form>
   </article>

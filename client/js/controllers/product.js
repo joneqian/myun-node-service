@@ -7,22 +7,34 @@ angular
       }, function () {
         for (var i = 0; i < $scope.products.length; i++) {
           var product = $scope.products[i];
-          product.isOverDue = false;
           product.msg = '';
+          if (product.count > 0) {
+            product.isCanSecKill = true;
+            product.btn = '秒杀';
+          } else {
+            product.isCanSecKill = false;
+            product.btn = '已售完';
+          }
+
         }
       });
 
       setInterval(function () {
         for (var i = 0; i < $scope.products.length; i++) {
           var product = $scope.products[i];
+          if (product.count <= 0) {
+            continue;
+          }
+
           var t = new Date(product.secKillEnd);//取得指定时间的总毫秒数
           var n = new Date().getTime(),//取得当前毫秒数
             c = t - n;//得到时间差
           if (c >= 0) {
             product.remainTime = getRemainTime(c);
           } else {
-            product.isOverDue = true;
+            product.isCanSecKill = false;
             product.remainTime = '过期了';
+            product.btn = '已过期';
           }
         }
         $scope.$digest();
@@ -30,7 +42,7 @@ angular
 
       $scope.submitForm = function (id) {
         var product = $scope.products[id - 1];
-        if (!product.isOverDue) {
+        if (product.isCanSecKill) {
           Order
             .secKillProduct({
               count: 1,
