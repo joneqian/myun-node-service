@@ -1,7 +1,7 @@
 angular
   .module('app')
-  .controller('ProductController', ['$scope', 'Product',
-    function ($scope, Product) {
+  .controller('ProductController', ['$scope', 'Product', 'Order',
+    function ($scope, Product, Order) {
       $scope.products = Product.find({
         filter: {}
       }, function () {
@@ -26,6 +26,19 @@ angular
         }
         $scope.$digest();
       }, 100);
+
+      $scope.submitForm = function (id) {
+        var product = $scope.products[id - 1];
+        Order
+          .create({
+            count: 1,
+            productId: product.id
+          })
+          .$promise
+          .then(function () {
+
+          });
+      };
 
       function getRemainTime(sec) {
         var days = Math.floor(sec / (1000 * 60 * 60 * 24));

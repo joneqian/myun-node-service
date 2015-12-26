@@ -22,6 +22,7 @@ angular
                 .$promise
                 .then(function () {
                     $rootScope.currentUser = null;
+                    $window.sessionStorage.removeItem('currentUser');
                 });
         }
 
