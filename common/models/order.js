@@ -30,12 +30,20 @@ module.exports = function (Order) {
               return;
             }
 
-            if (orders && orders.length >=2 ) {
+            if (orders && orders.length >= 2 ) {
               next(new Error("超出限购数量"));
               return;
             }
 
-            next();
+            product.count--;
+            product.save(function (err, savedObj) {
+              if (err) {
+                next(err);
+              } else {
+                console.log('product: ' + JSON.stringify(savedObj));
+                next();
+              }
+            });
           });
         });
       }
