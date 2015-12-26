@@ -1,40 +1,31 @@
 {
-  "name": "Product",
+  "name": "Order",
   "base": "PersistedModel",
   "idInjection": true,
   "options": {
     "validateUpsert": true
   },
   "properties": {
-    "name": {
+    "date": {
       "type": "string",
       "required": true
     },
     "count": {
       "type": "number",
       "required": true
-    },
-    "isSecKill": {
-      "type": "boolean",
-      "required": true
-    },
-    "secKillStart": {
-      "type": "string"
-    },
-    "secKillEnd": {
-      "type": "string"
-    },
-    "purchaseLimit": {
-      "type": "number",
-      "required": true
     }
   },
   "validations": [],
   "relations": {
-    "orders": {
-      "type": "hasMany",
-      "model": "Order",
+    "product": {
+      "type": "belongsTo",
+      "model": "Product",
       "foreignKey": "productId"
+    },
+    "user": {
+      "type": "belongsTo",
+      "model": "MYUser",
+      "foreignKey": "userId"
     }
   },
   "acls": [],

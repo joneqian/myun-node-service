@@ -37,7 +37,7 @@ module.exports = function (app) {
       secKillEnd.setMinutes(secKillStart.getMinutes() + 1);
       products[i] = {
         name: productName, count: 1000 + i, isSecKill: true,
-        secKillStart: utils.formatTime(secKillStart), secKillEnd: utils.formatTime(secKillEnd)
+        secKillStart: utils.formatTime(secKillStart), secKillEnd: utils.formatTime(secKillEnd), purchaseLimit: i + 1
       };
     }
     app.models.Product.create(products, cb);
