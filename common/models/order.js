@@ -4,27 +4,39 @@ module.exports = function (Order) {
     var req = context.req;
     req.body.date = utils.formatTime(new Date());
     req.body.userId = req.accessToken.userId;
-    Order.getApp(function (error , app) {
-      if (error) {
-        next(error);
+    Order.getApp(function (err , app) {
+      if (err) {
+        next(err);
       } else {
-        app.models.Product.findById(req.body.productId, function (error, product) {
-          if (error) {
-            next(error);
+        app.models.Product.findById(req.body.productId, function (err, product) {
+          if (err) {
+            next(err);
             return;
           }
 
           if (!product) {
-            next(new Error("product isn't exist"));
+            next(new Error("商品不存在"));
             return;
           }
 
           if (product.count <= 0) {
-            next(new Error("product have been sold out"));
+            next(new Error("商品已售完"));
             return;
           }
 
-          next();
+          Order.find({where: {userId: req.body.userId, productId: req.body.productId}}, function (err, orders) {
+            if (err) {
+              next(err);
+              return;
+            }
+
+            if (orders && orders.length >=2 ) {
+              next(new Error("超出限购数量"));
+              return;
+            }
+
+            next();
+          });
         });
       }
 
