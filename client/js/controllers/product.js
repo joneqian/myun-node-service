@@ -26,9 +26,10 @@ angular
             continue;
           }
 
-          var t = new Date(product.secKillEnd);//取得指定时间的总毫秒数
+          var t = new Date(Date.parse(product.secKillEnd.replace(/-/g,"/"))).getTime();//取得指定时间的总毫秒数
           var n = new Date().getTime(),//取得当前毫秒数
-            c = t - n;//得到时间差
+              c = t - n;//得到时间差
+
           if (c >= 0) {
             product.remainTime = getRemainTime(c);
           } else {
