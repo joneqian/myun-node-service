@@ -1,7 +1,8 @@
 angular
   .module('app')
-  .controller('ProductController', ['$scope', 'Product', 'Order',
-    function ($scope, Product, Order) {
+  .controller('ProductController', ['$scope', 'Product', 'Order','$window',
+    function ($scope, Product, Order,$window) {
+      $scope.currentUser = JSON.parse($window.sessionStorage.getItem('currentUser'));
       $scope.products = Product.find({
         filter: {}
       }, function () {
@@ -46,6 +47,7 @@ angular
         if (product.isCanSecKill) {
           Order
             .secKillProduct({
+              userId: $scope.currentUser.id,
               count: 1,
               productId: product.id
             })

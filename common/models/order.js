@@ -115,7 +115,7 @@ module.exports = function (Order) {
   Order.beforeRemote('secKillProduct', function(context, unused, next) {
     var req = context.req;
     req.body.date = utils.formatTime(new Date());
-    req.body.userId = req.accessToken.userId;
+    //req.body.userId = req.accessToken.userId;
     next();
   });
 };
