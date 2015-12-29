@@ -72,13 +72,13 @@ module.exports = function (Order) {
             return;
           }
 
-          Order.find({where: {userId: data.userId, productId: data.productId}}, function (err, orders) {
+          Order.count({where: {userId: data.userId, productId: data.productId}}, function (err, count) {
             if (err) {
               cb(null, errStr);
               return;
             }
 
-            if (orders && orders.length >= product.purchaseLimit ) {
+            if (count >= product.purchaseLimit ) {
               cb(null, JSON.stringify({status:3, msg:'超出限购数量'}));
               return;
             }
@@ -93,6 +93,9 @@ module.exports = function (Order) {
                     if (err) {
                       cb(null, errStr);
                     } else {
+                      Order.count({}, function(err, count) {
+                        console.log('order count: ' + count);
+                      });
                       cb(null, JSON.stringify({status:4, msg:'购买成功'}));
                     }
                 });
